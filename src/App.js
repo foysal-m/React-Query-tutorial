@@ -1,21 +1,38 @@
 import React, { useState } from 'react'
-import Navbar from './components/Navbar'
-import Planets from './components/Planets'
-import People from './components/People'
+import { QueryClient, QueryClientProvider } from 'react-query'
 import Foysal from './components/Foysal'
+import NavBar from './components/NavBar'
+import People from './components/People'
+import Planets from './components/Planets'
+import { ReactQueryDevtools } from 'react-query/devtools'
+
 function App() {
-  const [page, setPage] = useState('planets' || 'people' || 'foysal')
-  function renderCom() {
-    if (page === 'planets') return <Planets />
-    else if (page === 'foysal') return <Foysal />
-    else return <People />
+  const [page, setPage] = useState('planet' || 'people' || 'foysal')
+  const queryClient = new QueryClient()
+
+  function renderDom() {
+    if (page === 'planet') return <Planets />
+    else if (page === 'people') return <People />
+    else return <Foysal />
+
+    //OR
+    //  {page === 'planet' ? (
+    //   <Planets />
+    // ) : page === 'people' ? (
+    //   <People />
+    // ) : (
+    //   <Foysal
   }
+
   return (
-    <div className="App">
-      <h1>Star Wars Info</h1>
-      <Navbar setPage={setPage} />
-      <div className="content">{renderCom()}</div>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className="App">
+        <h1> Star Wars Info</h1>
+        <NavBar page={page} setPage={setPage} />
+        <ReactQueryDevtools initialIsOpen={false} />
+        <div>{renderDom()}</div>
+      </div>
+    </QueryClientProvider>
   )
 }
 

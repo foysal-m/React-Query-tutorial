@@ -1,15 +1,15 @@
 import React from 'react'
 
-function Navbar({ setPage }) {
+function NavBar({ setPage }) {
   return (
-    <div>
+    <>
       <nav>
-        <button onClick={() => setPage('planets')}>Planets</button>
+        <button onClick={() => setPage('planet')}>Planet</button>
         <button onClick={() => setPage('people')}>People</button>
-        <button onClick={() => setPage('foysal')}>Foysal</button>
+        <button onClick={() => setPage('foysal')}> Foysal</button>
       </nav>
-    </div>
+    </>
   )
 }
 
-export default Navbar
+export default NavBar
